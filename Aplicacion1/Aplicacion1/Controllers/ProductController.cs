@@ -1,8 +1,10 @@
 ﻿using Aplicacion1.Context;
+using Aplicacion1.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.ModelBinding;
 using System.Web.Mvc;
 
 namespace Aplicacion1.Controllers
@@ -19,5 +21,34 @@ namespace Aplicacion1.Controllers
 
             return View(products);
         }
+
+        // GET: Product/Create
+        public ActionResult Create() {
+
+            return View();
+        
+        }
+
+        // POST: Product/Create
+        [HttpPost]
+        public ActionResult Create(Product product) {
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Products.Add(product);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(product);
+            }
+            catch (Exception)
+            {
+                return View(product);
+            }
+
+        }
+
     }
 }
