@@ -112,5 +112,53 @@ namespace Aplicacion1.Controllers
 
         }
 
+        //GET: Product/Delete/5
+        public ActionResult Delete(int? id) {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var producto = db.Products.Find(id);
+
+            if (producto == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(producto);
+
+        }
+
+        //POST: Product/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, Product product) {
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    product = db.Products.Find(id);
+                    if (product == null)
+                    {
+                        return HttpNotFound();
+                    }
+
+                    db.Products.Remove(product);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception)
+            {
+                return View(product);
+            }
+
+            return View(product);
+        }
+
+
     }
 }
