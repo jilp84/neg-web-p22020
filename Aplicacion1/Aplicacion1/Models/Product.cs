@@ -16,6 +16,7 @@ namespace Aplicacion1.Models
         public decimal ProductPrice { get; set; }
         public DateTime ProductLastBuy { get; set; }
         public float ProductStock { get; set; }
+        public string ProductMeasure { get; set; }
 
     }
 }
