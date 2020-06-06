@@ -11,112 +11,112 @@ using P_Market.Models;
 
 namespace P_Market.Controllers
 {
-    public class ProductsController : Controller
+    public class ClientsController : Controller
     {
         private P_MarketContext db = new P_MarketContext();
 
-        // GET: Products
+        // GET: Clients
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.Category);
-            return View(products.ToList());
+            var clients = db.Clients.Include(c => c.IdentifitationType);
+            return View(clients.ToList());
         }
 
-        // GET: Products/Details/5
+        // GET: Clients/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Client client = db.Clients.Find(id);
+            if (client == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(client);
         }
 
-        // GET: Products/Create
+        // GET: Clients/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryKey = new SelectList(db.Categories, "CategoryKey", "CotegoryName");
+            ViewBag.IdentifitationTypeKey = new SelectList(db.IdentifitationTypes, "IdentifitationTypeKey", "IdentifitationTypeName");
             return View();
         }
 
-        // POST: Products/Create
+        // POST: Clients/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductId,ProductName,ProductPrice,ProductLastBuy,ProductStock,ProductMeasure,CategoryKey")] Product product)
+        public ActionResult Create([Bind(Include = "ClientKey,ClientName,ClientPhone,ClientIdentificationId,IdentifitationTypeKey")] Client client)
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
+                db.Clients.Add(client);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryKey = new SelectList(db.Categories, "CategoryKey", "CotegoryName", product.CategoryKey);
-            return View(product);
+            ViewBag.IdentifitationTypeKey = new SelectList(db.IdentifitationTypes, "IdentifitationTypeKey", "IdentifitationTypeName", client.IdentifitationTypeKey);
+            return View(client);
         }
 
-        // GET: Products/Edit/5
+        // GET: Clients/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Client client = db.Clients.Find(id);
+            if (client == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryKey = new SelectList(db.Categories, "CategoryKey", "CotegoryName", product.CategoryKey);
-            return View(product);
+            ViewBag.IdentifitationTypeKey = new SelectList(db.IdentifitationTypes, "IdentifitationTypeKey", "IdentifitationTypeName", client.IdentifitationTypeKey);
+            return View(client);
         }
 
-        // POST: Products/Edit/5
+        // POST: Clients/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,ProductName,ProductPrice,ProductLastBuy,ProductStock,ProductMeasure,CategoryKey")] Product product)
+        public ActionResult Edit([Bind(Include = "ClientKey,ClientName,ClientPhone,ClientIdentificationId,IdentifitationTypeKey")] Client client)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                db.Entry(client).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryKey = new SelectList(db.Categories, "CategoryKey", "CotegoryName", product.CategoryKey);
-            return View(product);
+            ViewBag.IdentifitationTypeKey = new SelectList(db.IdentifitationTypes, "IdentifitationTypeKey", "IdentifitationTypeName", client.IdentifitationTypeKey);
+            return View(client);
         }
 
-        // GET: Products/Delete/5
+        // GET: Clients/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Client client = db.Clients.Find(id);
+            if (client == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(client);
         }
 
-        // POST: Products/Delete/5
+        // POST: Clients/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            Client client = db.Clients.Find(id);
+            db.Clients.Remove(client);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

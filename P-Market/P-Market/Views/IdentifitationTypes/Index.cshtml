@@ -1,0 +1,33 @@
+﻿@model IEnumerable<P_Market.Models.IdentifitationType>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdentifitationTypeName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdentifitationTypeName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdentifitationTypeKey }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdentifitationTypeKey }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdentifitationTypeKey })
+        </td>
+    </tr>
+}
+
+</table>

@@ -11,112 +11,107 @@ using P_Market.Models;
 
 namespace P_Market.Controllers
 {
-    public class ProductsController : Controller
+    public class IdentifitationTypesController : Controller
     {
         private P_MarketContext db = new P_MarketContext();
 
-        // GET: Products
+        // GET: IdentifitationTypes
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.Category);
-            return View(products.ToList());
+            return View(db.IdentifitationTypes.ToList());
         }
 
-        // GET: Products/Details/5
+        // GET: IdentifitationTypes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            IdentifitationType identifitationType = db.IdentifitationTypes.Find(id);
+            if (identifitationType == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(identifitationType);
         }
 
-        // GET: Products/Create
+        // GET: IdentifitationTypes/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryKey = new SelectList(db.Categories, "CategoryKey", "CotegoryName");
             return View();
         }
 
-        // POST: Products/Create
+        // POST: IdentifitationTypes/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductId,ProductName,ProductPrice,ProductLastBuy,ProductStock,ProductMeasure,CategoryKey")] Product product)
+        public ActionResult Create([Bind(Include = "IdentifitationTypeKey,IdentifitationTypeName")] IdentifitationType identifitationType)
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
+                db.IdentifitationTypes.Add(identifitationType);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryKey = new SelectList(db.Categories, "CategoryKey", "CotegoryName", product.CategoryKey);
-            return View(product);
+            return View(identifitationType);
         }
 
-        // GET: Products/Edit/5
+        // GET: IdentifitationTypes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            IdentifitationType identifitationType = db.IdentifitationTypes.Find(id);
+            if (identifitationType == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryKey = new SelectList(db.Categories, "CategoryKey", "CotegoryName", product.CategoryKey);
-            return View(product);
+            return View(identifitationType);
         }
 
-        // POST: Products/Edit/5
+        // POST: IdentifitationTypes/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,ProductName,ProductPrice,ProductLastBuy,ProductStock,ProductMeasure,CategoryKey")] Product product)
+        public ActionResult Edit([Bind(Include = "IdentifitationTypeKey,IdentifitationTypeName")] IdentifitationType identifitationType)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                db.Entry(identifitationType).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryKey = new SelectList(db.Categories, "CategoryKey", "CotegoryName", product.CategoryKey);
-            return View(product);
+            return View(identifitationType);
         }
 
-        // GET: Products/Delete/5
+        // GET: IdentifitationTypes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            IdentifitationType identifitationType = db.IdentifitationTypes.Find(id);
+            if (identifitationType == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(identifitationType);
         }
 
-        // POST: Products/Delete/5
+        // POST: IdentifitationTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            IdentifitationType identifitationType = db.IdentifitationTypes.Find(id);
+            db.IdentifitationTypes.Remove(identifitationType);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

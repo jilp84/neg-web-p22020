@@ -22,5 +22,11 @@ namespace P_Market.Data
         public System.Data.Entity.DbSet<P_Market.Models.Product> Products { get; set; }
 
         public System.Data.Entity.DbSet<P_Market.Models.Category> Categories { get; set; }
+
+        public System.Data.Entity.DbSet<P_Market.Models.Supplier> Suppliers { get; set; }
+
+        public System.Data.Entity.DbSet<P_Market.Models.IdentifitationType> IdentifitationTypes { get; set; }
+
+        public System.Data.Entity.DbSet<P_Market.Models.Client> Clients { get; set; }
     }
 }

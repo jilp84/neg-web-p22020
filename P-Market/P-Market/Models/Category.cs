@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace P_Market.Models
 {
@@ -10,12 +11,15 @@ namespace P_Market.Models
 
         [Display(Name = "Nombre")]
         [Required]
-        [MaxLength(50,ErrorMessage = "El máximo de caracteres permitidos don 50")]
+        [MaxLength(50,ErrorMessage = "El máximo de caracteres permitidos son 50")]
         public string CotegoryName { get; set; }
 
         [Display(Name = "Descripción")]
-        [MaxLength(150, ErrorMessage = "El máximo de caracteres permitidos don 150")]
+        [MaxLength(150, ErrorMessage = "El máximo de caracteres permitidos son 150")]
         public string CategoryDescription { get; set; }
+
+        public virtual ICollection<Product> Products { get; set; }
+
 
     }
 }

@@ -11,112 +11,112 @@ using P_Market.Models;
 
 namespace P_Market.Controllers
 {
-    public class ProductsController : Controller
+    public class SuppliersController : Controller
     {
         private P_MarketContext db = new P_MarketContext();
 
-        // GET: Products
+        // GET: Suppliers
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.Category);
-            return View(products.ToList());
+            var suppliers = db.Suppliers.Include(s => s.IdentifitationType);
+            return View(suppliers.ToList());
         }
 
-        // GET: Products/Details/5
+        // GET: Suppliers/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Supplier supplier = db.Suppliers.Find(id);
+            if (supplier == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(supplier);
         }
 
-        // GET: Products/Create
+        // GET: Suppliers/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryKey = new SelectList(db.Categories, "CategoryKey", "CotegoryName");
+            ViewBag.IdentifitationTypeKey = new SelectList(db.IdentifitationTypes, "IdentifitationTypeKey", "IdentifitationTypeName");
             return View();
         }
 
-        // POST: Products/Create
+        // POST: Suppliers/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductId,ProductName,ProductPrice,ProductLastBuy,ProductStock,ProductMeasure,CategoryKey")] Product product)
+        public ActionResult Create([Bind(Include = "SupplierKey,SupplierName,SupplierPhone,SupplierIdentificationId,IdentifitationTypeKey")] Supplier supplier)
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
+                db.Suppliers.Add(supplier);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryKey = new SelectList(db.Categories, "CategoryKey", "CotegoryName", product.CategoryKey);
-            return View(product);
+            ViewBag.IdentifitationTypeKey = new SelectList(db.IdentifitationTypes, "IdentifitationTypeKey", "IdentifitationTypeName", supplier.IdentifitationTypeKey);
+            return View(supplier);
         }
 
-        // GET: Products/Edit/5
+        // GET: Suppliers/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Supplier supplier = db.Suppliers.Find(id);
+            if (supplier == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryKey = new SelectList(db.Categories, "CategoryKey", "CotegoryName", product.CategoryKey);
-            return View(product);
+            ViewBag.IdentifitationTypeKey = new SelectList(db.IdentifitationTypes, "IdentifitationTypeKey", "IdentifitationTypeName", supplier.IdentifitationTypeKey);
+            return View(supplier);
         }
 
-        // POST: Products/Edit/5
+        // POST: Suppliers/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,ProductName,ProductPrice,ProductLastBuy,ProductStock,ProductMeasure,CategoryKey")] Product product)
+        public ActionResult Edit([Bind(Include = "SupplierKey,SupplierName,SupplierPhone,SupplierIdentificationId,IdentifitationTypeKey")] Supplier supplier)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                db.Entry(supplier).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryKey = new SelectList(db.Categories, "CategoryKey", "CotegoryName", product.CategoryKey);
-            return View(product);
+            ViewBag.IdentifitationTypeKey = new SelectList(db.IdentifitationTypes, "IdentifitationTypeKey", "IdentifitationTypeName", supplier.IdentifitationTypeKey);
+            return View(supplier);
         }
 
-        // GET: Products/Delete/5
+        // GET: Suppliers/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Supplier supplier = db.Suppliers.Find(id);
+            if (supplier == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(supplier);
         }
 
-        // POST: Products/Delete/5
+        // POST: Suppliers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            Supplier supplier = db.Suppliers.Find(id);
+            db.Suppliers.Remove(supplier);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
