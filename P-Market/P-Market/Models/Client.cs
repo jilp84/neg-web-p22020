@@ -33,5 +33,8 @@ namespace P_Market.Models
 
         [ForeignKey("IdentifitationTypeKey")]
         public IdentifitationType IdentifitationType { get; set; }
+
+        public virtual ICollection<Sale> Sales { get; set; }
+
     }
 }
