@@ -83,8 +83,8 @@
                     <th>Opciones</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
+            <tbody id="tblProducts">
+                @*<tr>
                     <td>2</td>
                     <td>Laptop DELL XPS</td>
                     <td>18000</td>
@@ -99,13 +99,13 @@
                     <td>2</td>
                     <td>13000</td>
                     <td></td>
-                </tr>
+                </tr>*@
             </tbody>
         </table>
 
         @* INICIO DE ELEMENTO HIDDEN *@
 
-        <input type="hidden" name="SaleDetails.Index" id="SaleDetails.Index" value="0" />
+        @*<input type="hidden" name="SaleDetails.Index" id="SaleDetails.Index" value="0" />
         <input type="hidden" name="SaleDetails[0].ProductId" id="SaleDetails[0].ProductId" value="2" />
         <input type="hidden" name="SaleDetails[0].ProductName" id="SaleDetails[0].ProductName" value="Laptop DELL XPS" />
         <input type="hidden" name="SaleDetails[0].ProductPrice" id="SaleDetails[0].ProductPrice" value="18000" />
@@ -116,7 +116,7 @@
         <input type="hidden" name="SaleDetails[1].ProductName" id="SaleDetails[1].ProductName" value="Rollo de cable Azul Belden" />
         <input type="hidden" name="SaleDetails[1].ProductPrice" id="SaleDetails[1].ProductPrice" value="6500" />
         <input type="hidden" name="SaleDetails[1].ProductQuantity" id="SaleDetails[1].ProductQuantity" value="2" />
-
+        *@
         @* FIN DE ELEMENTO HIDDEN *@
 
     </div>
@@ -133,10 +133,84 @@
 
 }
 
-
-
-
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script>
+    let num = 0;
+    function AddProduct() {
+        //alert("Hola desde botón agregar");
+
+        if (ValidProduct()) {
+
+            //Capturar campos del formulario de producto
+            let ProductId = document.getElementById("ProductId").value;
+            let ProductName = document.getElementById("ProductName").value;
+            let ProductPrice = document.getElementById("ProductPrice").value;
+            let ProductQuantity = document.getElementById("ProductQuantity").value;
+            let ProductTotal = parseFloat(ProductPrice) * parseFloat(ProductQuantity);
+
+            //console.log(ProductTotal);
+
+            //Agregar datos a tabla html
+            let table = document.getElementById("tblProducts");
+
+            let tr = document.createElement("tr");
+
+            let tdId = document.createElement("td");
+            let tdName = document.createElement("td");
+            let tdPrice = document.createElement("td");
+            let tdQuantity = document.createElement("td");
+            let tdTotal = document.createElement("td");
+            let tdOptions = document.createElement("td");
+
+            tr.appendChild(tdId);
+            tr.appendChild(tdName);
+            tr.appendChild(tdPrice);
+            tr.appendChild(tdQuantity);
+            tr.appendChild(tdTotal);
+            tr.appendChild(tdOptions);
+
+            let button = document.createElement("input");
+            button.type = "button";
+            button.value = "Borrar";
+            button.id = "b_row" + num;
+            button.className = "btn btn-default btn-sm";
+            button.addEventListener('click', function () {
+
+            }, false);
+
+            tdOptions.appendChild(button);
+
+            tdId.innerHTML = ProductId;
+            tdName.innerHTML = ProductName;
+            tdPrice.innerHTML = ProductPrice;
+            tdQuantity.innerHTML = ProductQuantity;
+            tdTotal.innerHTML = ProductTotal;
+
+            tr.id = "row_" + num;
+
+            table.appendChild(tr);
+
+            num++;
+        } else {
+            alert("ERROR: Faltan datos del producto");
+        }
+
+
+    }
+
+    function ValidProduct() {
+        let valid = true;
+        let fProductId = document.getElementById("ProductId").value;
+        let fProductQuantity = document.getElementById("ProductQuantity").value;
+
+        if (fProductId.length == 0 || fProductQuantity.length == 0) {
+            valid = false;
+        }
+        return valid;
+    }
+
+
+</script>
