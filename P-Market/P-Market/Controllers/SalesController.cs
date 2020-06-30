@@ -4,6 +4,7 @@ using P_Market.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Mvc;
 
@@ -38,6 +39,21 @@ namespace P_Market.Controllers
 
                     db.Sales.Add(sale);
                     db.SaveChanges();
+
+                    foreach (var item in salesViewModel.SaleDetails)
+                    {
+                        var product = db.Products.Find(item.ProductId);
+                        SaleDetails saleDetails = new SaleDetails {
+                            ProductId = item.ProductId,
+                            SaleDetailsQuantity = item.ProductQuantity,
+                            SaleDetailsSubTotal = product.ProductPrice * item.ProductQuantity,
+                            SaleKey = sale.SaleKey
+                        };
+
+                        db.SaleDetails.Add(saleDetails);
+                        db.SaveChanges();
+
+                    }
 
                 }
 
