@@ -178,7 +178,7 @@
             button.id = "b_row" + num;
             button.className = "btn btn-default btn-sm";
             button.addEventListener('click', function () {
-
+                //alert("Hola");
             }, false);
 
             tdOptions.appendChild(button);
@@ -193,7 +193,54 @@
 
             table.appendChild(tr);
 
+            /*HIDDENS*/
+
+            let SaleDetails = document.getElementById("SaleDetails");
+            let HiddenIndex = document.createElement("input");
+            let HiddenProductId = document.createElement("input");
+            let HiddenProductName = document.createElement("input");
+            let HiddenProductPrice = document.createElement("input");
+            let HiddenProductQuantity = document.createElement("input");
+
+            HiddenIndex.name = "SaleDetails.Index";
+            HiddenIndex.id = "SaleDetails.Index";
+            HiddenIndex.value = num;
+            HiddenIndex.type = "hidden";
+            HiddenIndex.className += "Indexlist" + num;
+
+            HiddenProductId.name = "SaleDetails[" + num + "].ProductId";
+            HiddenProductId.id = "SaleDetails[" + num + "].ProductId";
+            HiddenProductId.value = ProductId;
+            HiddenProductId.type = "hidden";
+            
+            HiddenProductName.name = "SaleDetails[" + num + "].ProductName";
+            HiddenProductName.id = "SaleDetails[" + num + "].ProductName";
+            HiddenProductName.value = ProductName;
+            HiddenProductName.type = "hidden";
+
+            HiddenProductPrice.name = "SaleDetails[" + num + "].ProductPrice";
+            HiddenProductPrice.id = "SaleDetails[" + num + "].ProductPrice";
+            HiddenProductPrice.value = ProductPrice;
+            HiddenProductPrice.type = "hidden";
+
+            HiddenProductQuantity.name = "SaleDetails[" + num + "].ProductQuantity";
+            HiddenProductQuantity.id = "SaleDetails[" + num + "].ProductQuantity";
+            HiddenProductQuantity.value = ProductQuantity;
+            HiddenProductQuantity.type = "hidden";
+
+            SaleDetails.appendChild(HiddenIndex);
+            SaleDetails.appendChild(HiddenProductId);
+            SaleDetails.appendChild(HiddenProductName);
+            SaleDetails.appendChild(HiddenProductPrice);
+            SaleDetails.appendChild(HiddenProductQuantity);
+
+            document.getElementById("ProductId").value = "";
+            document.getElementById("ProductName").value = "";
+            document.getElementById("ProductPrice").value = "";
+            document.getElementById("ProductQuantity").value = "";
+
             num++;
+
         } else {
             alert("ERROR: Faltan datos del producto");
         }
