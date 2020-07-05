@@ -178,7 +178,14 @@
             button.id = "b_row" + num;
             button.className = "btn btn-default btn-sm";
             button.addEventListener('click', function () {
-                //alert("Hola");
+                
+                let str = this.id;
+                let res = str.substring(5, str.length); 
+
+                if (deleteRow(this)) {
+                    deleteHidden(res);
+                }
+
             }, false);
 
             tdOptions.appendChild(button);
@@ -203,7 +210,7 @@
             let HiddenProductQuantity = document.createElement("input");
 
             HiddenIndex.name = "SaleDetails.Index";
-            HiddenIndex.id = "SaleDetails.Index";
+            HiddenIndex.id = "SaleDetails.Index" + num;
             HiddenIndex.value = num;
             HiddenIndex.type = "hidden";
             HiddenIndex.className += "Indexlist" + num;
@@ -259,5 +266,37 @@
         return valid;
     }
 
+    function deleteRow(button) {
+
+        let row = button.parentNode.parentNode;
+        let name = row.getElementsByTagName("td")[1].innerHTML;
+        if (confirm("Quiere eliminar este registro: " + name)) {
+            //Obtener referencia de la tabla
+            let table = document.getElementById("table");
+
+            //Borrar fila de la tabla
+            table.deleteRow(row.rowIndex);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    function deleteHidden(r) {
+        let vProductId = document.getElementById("SaleDetails[" + r + "].ProductId");
+        let vProductName = document.getElementById("SaleDetails[" + r + "].ProductName");
+        let vProductPrice = document.getElementById("SaleDetails[" + r + "].ProductPrice");
+        let vProductQuantity = document.getElementById("SaleDetails[" + r + "].ProductQuantity");
+        let vSaleDetailsIndex = document.getElementById("SaleDetails.Index" + r);
+
+        vProductId.remove();
+        vProductName.remove();
+        vProductPrice.remove();
+        vProductQuantity.remove();
+        vSaleDetailsIndex.remove();
+
+
+    }
 
 </script>

@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<P_Market.Models.ViewModels.SaleViewModel>
+
 @{
     ViewBag.Titulo = "Ventas";
 }
@@ -11,3 +12,48 @@
 
 </p>
 
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SaleKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaleDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaleTotal)
+            </th>
+            <th>
+                Opciones
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(m => item.SaleKey)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.ClientName)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.SaleDate)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.SaleTotal)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.SaleKey }) |
+                @Html.ActionLink("Details", "Details", new { id = item.SaleKey }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.SaleKey })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

@@ -8,11 +8,17 @@ namespace P_Market.Models.ViewModels
 {
     public class SaleViewModel
     {
+        [Display(Name = "Venta No")]
+        public int SaleKey { get; set; }
+
         [Display(Name = "Codigo")]
         public int ClientKey { get; set; }
 
         [Display(Name = "Cliente")]
         public string ClientName { get; set; }
+
+        [Display(Name = "Fecha")]
+        public DateTime SaleDate { get; set; }
 
         [Display(Name = "Total")]
         public decimal SaleTotal {
