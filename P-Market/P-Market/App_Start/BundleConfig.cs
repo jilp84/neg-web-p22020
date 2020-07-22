@@ -25,6 +25,9 @@ namespace P_Market
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+            //Template Custom
+            bundles.Add(new StyleBundle("~/Content/customcss").Include(
+                      "~/Content/TemplateCustom/styles.css"));
         }
     }
 }

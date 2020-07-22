@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template</title>
+
+    @Styles.Render("~/Content/customcss")
+
+</head>
+<body>
+
+    <!-- INICIO DEL HEADER -->
+
+    <div class="header">
+
+        <h1>Blog</h1>
+
+    </div>
+
+    <!-- FIN DEL HEADER -->
+    <!-- INICIO FILA PRINCIPAL -->
+
+    <div class="row">
+
+        <!-- INICIO COLUMNA IZQUIERDA -->
+        <div class="leftcolumn">
+            
+            @RenderBody()
+
+        </div>
+
+        <!-- FIN COLUMNA IZQUIERDA -->
+        <!-- INICIO COLUMNA DERECHA -->
+
+        <div class="rightColumn">
+            
+            @Html.Partial("_ParcialMenuTemplateCustom")
+
+        </div>
+
+        <!-- FIN COLUMNA DERECHA -->
+    </div>
+    <!-- FIN FILA PRINCIPAL -->
+    <!-- INICIO FOOTER -->
+    <div class="footer">
+        <h2>Footer</h2>
+    </div>
+    <!-- FIN FOOTER -->
+
+</body>
+</html>

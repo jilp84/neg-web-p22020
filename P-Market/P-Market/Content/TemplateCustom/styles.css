@@ -1,0 +1,79 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial;
+    padding: 20px;
+    background: rgb(212, 212, 212);
+}
+
+.header {
+    padding: 30px;
+    font-size: 40px;
+    text-align: center;
+    background-color: white;
+}
+
+.leftcolumn {
+    float: left;
+    width: 75%;
+}
+
+.d_img {
+    background-color: #aaa;
+    width: 100%;
+    padding: 10px;
+}
+
+img {
+    width: 100%;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.rightColumn {
+    float: left;
+    width: 25%;
+    padding-left: 20px;
+}
+
+.menu {
+    width: 100%;
+}
+
+    .menu a {
+        background-color: #eee;
+        color: black;
+        display: block;
+        padding: 12px;
+        text-decoration: none;
+    }
+
+        .menu a:hover {
+            background-color: #ccc;
+        }
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.footer {
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+    background-color: white;
+}
+
+@media screen and (max-width: 800px) {
+    .leftcolumn, .rightColumn {
+        width: 100%;
+        padding: 0;
+    }
+}
